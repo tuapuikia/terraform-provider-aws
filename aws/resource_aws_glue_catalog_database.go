@@ -8,7 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/glue"
 
-	"github.com/hashicorp/terraform/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 )
 
 func resourceAwsGlueCatalogDatabase() *schema.Resource {
@@ -136,6 +136,7 @@ func resourceAwsGlueCatalogDatabaseRead(d *schema.ResourceData, meta interface{}
 		if isAWSErr(err, glue.ErrCodeEntityNotFoundException, "") {
 			log.Printf("[WARN] Glue Catalog Database (%s) not found, removing from state", d.Id())
 			d.SetId("")
+			return nil
 		}
 
 		return fmt.Errorf("Error reading Glue Catalog Database: %s", err.Error())
@@ -187,7 +188,13 @@ func resourceAwsGlueCatalogDatabaseExists(d *schema.ResourceData, meta interface
 	}
 
 	_, err = glueconn.GetDatabase(input)
-	return err == nil, err
+	if err != nil {
+		if isAWSErr(err, glue.ErrCodeEntityNotFoundException, "") {
+			return false, nil
+		}
+		return false, err
+	}
+	return true, nil
 }
 
 func readAwsGlueCatalogID(id string) (catalogID string, name string, err error) {

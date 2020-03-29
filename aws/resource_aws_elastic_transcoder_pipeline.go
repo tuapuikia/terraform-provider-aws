@@ -8,8 +8,8 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/service/elastictranscoder"
-	"github.com/hashicorp/terraform/helper/resource"
-	"github.com/hashicorp/terraform/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/resource"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 )
 
 func resourceAwsElasticTranscoderPipeline() *schema.Resource {
@@ -18,6 +18,9 @@ func resourceAwsElasticTranscoderPipeline() *schema.Resource {
 		Read:   resourceAwsElasticTranscoderPipelineRead,
 		Update: resourceAwsElasticTranscoderPipelineUpdate,
 		Delete: resourceAwsElasticTranscoderPipelineDelete,
+		Importer: &schema.ResourceImporter{
+			State: schema.ImportStatePassthrough,
+		},
 
 		Schema: map[string]*schema.Schema{
 			"arn": {
@@ -210,7 +213,7 @@ func resourceAwsElasticTranscoderPipelineCreate(d *schema.ResourceData, meta int
 
 	if (req.OutputBucket == nil && (req.ContentConfig == nil || req.ContentConfig.Bucket == nil)) ||
 		(req.OutputBucket != nil && req.ContentConfig != nil && req.ContentConfig.Bucket != nil) {
-		return fmt.Errorf("[ERROR] you must specify only one of output_bucket or content_config.bucket")
+		return fmt.Errorf("you must specify only one of output_bucket or content_config.bucket")
 	}
 
 	log.Printf("[DEBUG] Elastic Transcoder Pipeline create opts: %s", req)
@@ -235,7 +238,7 @@ func expandETNotifications(d *schema.ResourceData) *elastictranscoder.Notificati
 	}
 
 	s := set.(*schema.Set).List()
-	if s == nil || len(s) == 0 {
+	if len(s) == 0 {
 		return nil
 	}
 
@@ -323,11 +326,18 @@ func expandETPermList(permissions *schema.Set) []*elastictranscoder.Permission {
 	var perms []*elastictranscoder.Permission
 
 	for _, p := range permissions.List() {
+		if p == nil {
+			continue
+		}
+
+		m := p.(map[string]interface{})
+
 		perm := &elastictranscoder.Permission{
-			Access:      getStringPtrList(p.(map[string]interface{}), "access"),
+			Access:      expandStringList(m["access"].([]interface{})),
 			Grantee:     getStringPtr(p, "grantee"),
 			GranteeType: getStringPtr(p, "grantee_type"),
 		}
+
 		perms = append(perms, perm)
 	}
 	return perms
@@ -414,10 +424,10 @@ func resourceAwsElasticTranscoderPipelineRead(d *schema.ResourceData, meta inter
 
 	pipeline := resp.Pipeline
 
-	d.Set("arn", *pipeline.Arn)
+	d.Set("arn", pipeline.Arn)
 
 	if arn := pipeline.AwsKmsKeyArn; arn != nil {
-		d.Set("aws_kms_key_arn", *arn)
+		d.Set("aws_kms_key_arn", arn)
 	}
 
 	if pipeline.ContentConfig != nil {
@@ -434,8 +444,8 @@ func resourceAwsElasticTranscoderPipelineRead(d *schema.ResourceData, meta inter
 		}
 	}
 
-	d.Set("input_bucket", *pipeline.InputBucket)
-	d.Set("name", *pipeline.Name)
+	d.Set("input_bucket", pipeline.InputBucket)
+	d.Set("name", pipeline.Name)
 
 	notifications := flattenETNotifications(pipeline.Notifications)
 	if notifications != nil {
@@ -444,7 +454,7 @@ func resourceAwsElasticTranscoderPipelineRead(d *schema.ResourceData, meta inter
 		}
 	}
 
-	d.Set("role", *pipeline.Role)
+	d.Set("role", pipeline.Role)
 
 	if pipeline.ThumbnailConfig != nil {
 		err := d.Set("thumbnail_config", flattenETPipelineOutputConfig(pipeline.ThumbnailConfig))
@@ -461,7 +471,7 @@ func resourceAwsElasticTranscoderPipelineRead(d *schema.ResourceData, meta inter
 	}
 
 	if pipeline.OutputBucket != nil {
-		d.Set("output_bucket", *pipeline.OutputBucket)
+		d.Set("output_bucket", pipeline.OutputBucket)
 	}
 
 	return nil

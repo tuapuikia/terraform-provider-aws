@@ -17,7 +17,7 @@ const opAssociateMemberAccount = "AssociateMemberAccount"
 // AssociateMemberAccountRequest generates a "aws/request.Request" representing the
 // client's request for the AssociateMemberAccount operation. The "output" return
 // value will be populated with the request's response once the request completes
-// successfuly.
+// successfully.
 //
 // Use "Send" method on the returned Request to send the API call to the service.
 // the "output" return value is not valid until after Send returns without error.
@@ -51,8 +51,7 @@ func (c *Macie) AssociateMemberAccountRequest(input *AssociateMemberAccountInput
 
 	output = &AssociateMemberAccountOutput{}
 	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
 	return
 }
 
@@ -67,16 +66,16 @@ func (c *Macie) AssociateMemberAccountRequest(input *AssociateMemberAccountInput
 // See the AWS API reference guide for Amazon Macie's
 // API operation AssociateMemberAccount for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
+// Returned Error Types:
+//   * InvalidInputException
 //   The request was rejected because an invalid or out-of-range value was supplied
 //   for an input parameter.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
+//   * LimitExceededException
 //   The request was rejected because it attempted to create resources beyond
 //   the current AWS account limits. The error code describes the limit exceeded.
 //
-//   * ErrCodeInternalException "InternalException"
+//   * InternalException
 //   Internal server error.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/AssociateMemberAccount
@@ -106,7 +105,7 @@ const opAssociateS3Resources = "AssociateS3Resources"
 // AssociateS3ResourcesRequest generates a "aws/request.Request" representing the
 // client's request for the AssociateS3Resources operation. The "output" return
 // value will be populated with the request's response once the request completes
-// successfuly.
+// successfully.
 //
 // Use "Send" method on the returned Request to send the API call to the service.
 // the "output" return value is not valid until after Send returns without error.
@@ -158,19 +157,19 @@ func (c *Macie) AssociateS3ResourcesRequest(input *AssociateS3ResourcesInput) (r
 // See the AWS API reference guide for Amazon Macie's
 // API operation AssociateS3Resources for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
+// Returned Error Types:
+//   * InvalidInputException
 //   The request was rejected because an invalid or out-of-range value was supplied
 //   for an input parameter.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
+//   * AccessDeniedException
 //   You do not have required permissions to access the requested resource.
 //
-//   * ErrCodeLimitExceededException "LimitExceededException"
+//   * LimitExceededException
 //   The request was rejected because it attempted to create resources beyond
 //   the current AWS account limits. The error code describes the limit exceeded.
 //
-//   * ErrCodeInternalException "InternalException"
+//   * InternalException
 //   Internal server error.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/AssociateS3Resources
@@ -200,7 +199,7 @@ const opDisassociateMemberAccount = "DisassociateMemberAccount"
 // DisassociateMemberAccountRequest generates a "aws/request.Request" representing the
 // client's request for the DisassociateMemberAccount operation. The "output" return
 // value will be populated with the request's response once the request completes
-// successfuly.
+// successfully.
 //
 // Use "Send" method on the returned Request to send the API call to the service.
 // the "output" return value is not valid until after Send returns without error.
@@ -234,8 +233,7 @@ func (c *Macie) DisassociateMemberAccountRequest(input *DisassociateMemberAccoun
 
 	output = &DisassociateMemberAccountOutput{}
 	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	req.Handlers.Unmarshal.Swap(jsonrpc.UnmarshalHandler.Name, protocol.UnmarshalDiscardBodyHandler)
 	return
 }
 
@@ -250,12 +248,12 @@ func (c *Macie) DisassociateMemberAccountRequest(input *DisassociateMemberAccoun
 // See the AWS API reference guide for Amazon Macie's
 // API operation DisassociateMemberAccount for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
+// Returned Error Types:
+//   * InvalidInputException
 //   The request was rejected because an invalid or out-of-range value was supplied
 //   for an input parameter.
 //
-//   * ErrCodeInternalException "InternalException"
+//   * InternalException
 //   Internal server error.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/DisassociateMemberAccount
@@ -285,7 +283,7 @@ const opDisassociateS3Resources = "DisassociateS3Resources"
 // DisassociateS3ResourcesRequest generates a "aws/request.Request" representing the
 // client's request for the DisassociateS3Resources operation. The "output" return
 // value will be populated with the request's response once the request completes
-// successfuly.
+// successfully.
 //
 // Use "Send" method on the returned Request to send the API call to the service.
 // the "output" return value is not valid until after Send returns without error.
@@ -336,15 +334,15 @@ func (c *Macie) DisassociateS3ResourcesRequest(input *DisassociateS3ResourcesInp
 // See the AWS API reference guide for Amazon Macie's
 // API operation DisassociateS3Resources for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
+// Returned Error Types:
+//   * InvalidInputException
 //   The request was rejected because an invalid or out-of-range value was supplied
 //   for an input parameter.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
+//   * AccessDeniedException
 //   You do not have required permissions to access the requested resource.
 //
-//   * ErrCodeInternalException "InternalException"
+//   * InternalException
 //   Internal server error.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/DisassociateS3Resources
@@ -374,7 +372,7 @@ const opListMemberAccounts = "ListMemberAccounts"
 // ListMemberAccountsRequest generates a "aws/request.Request" representing the
 // client's request for the ListMemberAccounts operation. The "output" return
 // value will be populated with the request's response once the request completes
-// successfuly.
+// successfully.
 //
 // Use "Send" method on the returned Request to send the API call to the service.
 // the "output" return value is not valid until after Send returns without error.
@@ -429,11 +427,11 @@ func (c *Macie) ListMemberAccountsRequest(input *ListMemberAccountsInput) (req *
 // See the AWS API reference guide for Amazon Macie's
 // API operation ListMemberAccounts for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInternalException "InternalException"
+// Returned Error Types:
+//   * InternalException
 //   Internal server error.
 //
-//   * ErrCodeInvalidInputException "InvalidInputException"
+//   * InvalidInputException
 //   The request was rejected because an invalid or out-of-range value was supplied
 //   for an input parameter.
 //
@@ -470,7 +468,7 @@ func (c *Macie) ListMemberAccountsWithContext(ctx aws.Context, input *ListMember
 //    // Example iterating over at most 3 pages of a ListMemberAccounts operation.
 //    pageNum := 0
 //    err := client.ListMemberAccountsPages(params,
-//        func(page *ListMemberAccountsOutput, lastPage bool) bool {
+//        func(page *macie.ListMemberAccountsOutput, lastPage bool) bool {
 //            pageNum++
 //            fmt.Println(page)
 //            return pageNum <= 3
@@ -502,10 +500,12 @@ func (c *Macie) ListMemberAccountsPagesWithContext(ctx aws.Context, input *ListM
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListMemberAccountsOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListMemberAccountsOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -514,7 +514,7 @@ const opListS3Resources = "ListS3Resources"
 // ListS3ResourcesRequest generates a "aws/request.Request" representing the
 // client's request for the ListS3Resources operation. The "output" return
 // value will be populated with the request's response once the request completes
-// successfuly.
+// successfully.
 //
 // Use "Send" method on the returned Request to send the API call to the service.
 // the "output" return value is not valid until after Send returns without error.
@@ -572,15 +572,15 @@ func (c *Macie) ListS3ResourcesRequest(input *ListS3ResourcesInput) (req *reques
 // See the AWS API reference guide for Amazon Macie's
 // API operation ListS3Resources for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
+// Returned Error Types:
+//   * InvalidInputException
 //   The request was rejected because an invalid or out-of-range value was supplied
 //   for an input parameter.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
+//   * AccessDeniedException
 //   You do not have required permissions to access the requested resource.
 //
-//   * ErrCodeInternalException "InternalException"
+//   * InternalException
 //   Internal server error.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/ListS3Resources
@@ -616,7 +616,7 @@ func (c *Macie) ListS3ResourcesWithContext(ctx aws.Context, input *ListS3Resourc
 //    // Example iterating over at most 3 pages of a ListS3Resources operation.
 //    pageNum := 0
 //    err := client.ListS3ResourcesPages(params,
-//        func(page *ListS3ResourcesOutput, lastPage bool) bool {
+//        func(page *macie.ListS3ResourcesOutput, lastPage bool) bool {
 //            pageNum++
 //            fmt.Println(page)
 //            return pageNum <= 3
@@ -648,10 +648,12 @@ func (c *Macie) ListS3ResourcesPagesWithContext(ctx aws.Context, input *ListS3Re
 		},
 	}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListS3ResourcesOutput), !p.HasNextPage())
+	for p.Next() {
+		if !fn(p.Page().(*ListS3ResourcesOutput), !p.HasNextPage()) {
+			break
+		}
 	}
+
 	return p.Err()
 }
 
@@ -660,7 +662,7 @@ const opUpdateS3Resources = "UpdateS3Resources"
 // UpdateS3ResourcesRequest generates a "aws/request.Request" representing the
 // client's request for the UpdateS3Resources operation. The "output" return
 // value will be populated with the request's response once the request completes
-// successfuly.
+// successfully.
 //
 // Use "Send" method on the returned Request to send the API call to the service.
 // the "output" return value is not valid until after Send returns without error.
@@ -712,15 +714,15 @@ func (c *Macie) UpdateS3ResourcesRequest(input *UpdateS3ResourcesInput) (req *re
 // See the AWS API reference guide for Amazon Macie's
 // API operation UpdateS3Resources for usage and error information.
 //
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
+// Returned Error Types:
+//   * InvalidInputException
 //   The request was rejected because an invalid or out-of-range value was supplied
 //   for an input parameter.
 //
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
+//   * AccessDeniedException
 //   You do not have required permissions to access the requested resource.
 //
-//   * ErrCodeInternalException "InternalException"
+//   * InternalException
 //   Internal server error.
 //
 // See also, https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/UpdateS3Resources
@@ -743,6 +745,65 @@ func (c *Macie) UpdateS3ResourcesWithContext(ctx aws.Context, input *UpdateS3Res
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
 	return out, req.Send()
+}
+
+// You do not have required permissions to access the requested resource.
+type AccessDeniedException struct {
+	_            struct{} `type:"structure"`
+	respMetadata protocol.ResponseMetadata
+
+	Message_ *string `locationName:"message" type:"string"`
+
+	// Resource type that caused the exception
+	ResourceType *string `locationName:"resourceType" type:"string"`
+}
+
+// String returns the string representation
+func (s AccessDeniedException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AccessDeniedException) GoString() string {
+	return s.String()
+}
+
+func newErrorAccessDeniedException(v protocol.ResponseMetadata) error {
+	return &AccessDeniedException{
+		respMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s AccessDeniedException) Code() string {
+	return "AccessDeniedException"
+}
+
+// Message returns the exception's message.
+func (s AccessDeniedException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s AccessDeniedException) OrigErr() error {
+	return nil
+}
+
+func (s AccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s AccessDeniedException) StatusCode() int {
+	return s.respMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s AccessDeniedException) RequestID() string {
+	return s.respMetadata.RequestID
 }
 
 type AssociateMemberAccountInput struct {
@@ -1151,6 +1212,191 @@ func (s *FailedS3Resource) SetErrorMessage(v string) *FailedS3Resource {
 func (s *FailedS3Resource) SetFailedItem(v *S3Resource) *FailedS3Resource {
 	s.FailedItem = v
 	return s
+}
+
+// Internal server error.
+type InternalException struct {
+	_            struct{} `type:"structure"`
+	respMetadata protocol.ResponseMetadata
+
+	// Error code for the exception
+	ErrorCode *string `locationName:"errorCode" type:"string"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation
+func (s InternalException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s InternalException) GoString() string {
+	return s.String()
+}
+
+func newErrorInternalException(v protocol.ResponseMetadata) error {
+	return &InternalException{
+		respMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s InternalException) Code() string {
+	return "InternalException"
+}
+
+// Message returns the exception's message.
+func (s InternalException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s InternalException) OrigErr() error {
+	return nil
+}
+
+func (s InternalException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s InternalException) StatusCode() int {
+	return s.respMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s InternalException) RequestID() string {
+	return s.respMetadata.RequestID
+}
+
+// The request was rejected because an invalid or out-of-range value was supplied
+// for an input parameter.
+type InvalidInputException struct {
+	_            struct{} `type:"structure"`
+	respMetadata protocol.ResponseMetadata
+
+	// Error code for the exception
+	ErrorCode *string `locationName:"errorCode" type:"string"`
+
+	// Field that has invalid input
+	FieldName *string `locationName:"fieldName" type:"string"`
+
+	Message_ *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation
+func (s InvalidInputException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s InvalidInputException) GoString() string {
+	return s.String()
+}
+
+func newErrorInvalidInputException(v protocol.ResponseMetadata) error {
+	return &InvalidInputException{
+		respMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s InvalidInputException) Code() string {
+	return "InvalidInputException"
+}
+
+// Message returns the exception's message.
+func (s InvalidInputException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s InvalidInputException) OrigErr() error {
+	return nil
+}
+
+func (s InvalidInputException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s InvalidInputException) StatusCode() int {
+	return s.respMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s InvalidInputException) RequestID() string {
+	return s.respMetadata.RequestID
+}
+
+// The request was rejected because it attempted to create resources beyond
+// the current AWS account limits. The error code describes the limit exceeded.
+type LimitExceededException struct {
+	_            struct{} `type:"structure"`
+	respMetadata protocol.ResponseMetadata
+
+	// Error code for the exception
+	ErrorCode *string `locationName:"errorCode" type:"string"`
+
+	Message_ *string `locationName:"message" type:"string"`
+
+	// Resource type that caused the exception
+	ResourceType *string `locationName:"resourceType" type:"string"`
+}
+
+// String returns the string representation
+func (s LimitExceededException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LimitExceededException) GoString() string {
+	return s.String()
+}
+
+func newErrorLimitExceededException(v protocol.ResponseMetadata) error {
+	return &LimitExceededException{
+		respMetadata: v,
+	}
+}
+
+// Code returns the exception type name.
+func (s LimitExceededException) Code() string {
+	return "LimitExceededException"
+}
+
+// Message returns the exception's message.
+func (s LimitExceededException) Message() string {
+	if s.Message_ != nil {
+		return *s.Message_
+	}
+	return ""
+}
+
+// OrigErr always returns nil, satisfies awserr.Error interface.
+func (s LimitExceededException) OrigErr() error {
+	return nil
+}
+
+func (s LimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s\n%s", s.Code(), s.Message(), s.String())
+}
+
+// Status code returns the HTTP status code for the request's response error.
+func (s LimitExceededException) StatusCode() int {
+	return s.respMetadata.StatusCode
+}
+
+// RequestID returns the service's response RequestID for request.
+func (s LimitExceededException) RequestID() string {
+	return s.respMetadata.RequestID
 }
 
 type ListMemberAccountsInput struct {
